@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+
+<fragment>
+
+  <extension target="application#MODULE">
+
+    <module>
+      <java>${bundle.fileName}</java>
+    </module>
+
+  </extension>
+
+  <extension target="web#FILTER">
+    <filter-mapping>
+      <filter-name>Seam Servlet Filter</filter-name>
+      <url-pattern>*.pdf</url-pattern>
+    </filter-mapping>
+
+  </extension>
+
+  <extension target="web#SERVLET">
+
+    <servlet-mapping>
+      <servlet-name>Faces Servlet</servlet-name>
+      <url-pattern>*.seam</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+      <servlet-name>Document Store Servlet</servlet-name>
+      <servlet-class>org.jboss.seam.pdf.DocumentStoreServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+      <servlet-name>Document Store Servlet</servlet-name>
+      <url-pattern>*.pdf</url-pattern>
+    </servlet-mapping>
+  </extension>
+
+  <install>
+
+    <unzip from="${bundle.fileName}" to="/">
+      <!-- sample templates -->
+      <include>nuxeo.war/**</include>
+      <!-- pdf key store config -->
+      <include>config/**</include>
+    </unzip>
+
+    <unzip from="${bundle.fileName}" to="nuxeo.war/WEB-INF/">
+      <include>lib/**</include>
+    </unzip>
+
+  </install>
+
+</fragment>
+
