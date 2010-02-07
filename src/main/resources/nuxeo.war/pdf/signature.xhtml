@@ -7,8 +7,8 @@
             author="Seam Team"
             creator="Seam PDF example app">
 
-    <p:image alignment="right" wrap="true" resource="/pdf/jboss.jpg" /> 
-    <p:font size="24"><p:paragraph spacingBefore="16" spacingAfter="40">Order #{currentOrder.orderId} </p:paragraph></p:font>  
+    <p:image alignment="right" wrap="true" value="/pdf/jboss.jpg" />
+    <p:font size="24"><p:paragraph spacingBefore="16" spacingAfter="40">Order #{currentOrder.orderId} </p:paragraph></p:font>
 
 
     <p:paragraph>Dear #{currentOrder.customerName},</p:paragraph>
@@ -21,7 +21,7 @@ Your order on <p:text value=" #{currentOrder.orderDate}"><f:convertDateTime styl
         <f:facet name="defaultCell">
             <p:cell borderWidth="0" horizontalAlignment="right"/>
         </f:facet>
-            
+
         <p:cell colspan="2" borderWidth="0" horizontalAlignment="center">
             <p:font size="24"><p:paragraph>Order Summary</p:paragraph></p:font>
         </p:cell>
@@ -52,6 +52,6 @@ Your order on <p:text value=" #{currentOrder.orderDate}"><f:convertDateTime styl
         </p:cell>
     </p:table>
 
-    <p:signature field="My Signature" 
+    <p:signature field="My Signature"
                  size="200 200 400 400"  />
 </p:document>

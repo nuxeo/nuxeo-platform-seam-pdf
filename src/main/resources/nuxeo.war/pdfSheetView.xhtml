@@ -1,0 +1,76 @@
+<p:document xmlns:ui="http://java.sun.com/jsf/facelets"
+            xmlns:f="http://java.sun.com/jsf/core"
+            xmlns:p="http://jboss.com/products/seam/pdf"
+            xmlns:nxl="http://nuxeo.org/nxforms/layout"
+            xmlns:nxu="http://nuxeo.org/nxweb/util"
+            title="#{currentDocument.title} (PDF Sheet)"
+            keywords=""
+            subject=""
+            author="Nuxeo (#{currentNuxeoPrincipal.name})"
+            creator="Nuxeo DM">
+
+    <p:header borderWidthTop="1" borderColorTop="blue"
+              borderWidthBottom="0" alignment="center">
+        Nuxeo : #{currentDocument.title}
+    </p:header>
+
+    <p:footer borderWidthTop="1" borderColorTop="blue"
+              borderWidthBottom="0" alignment="center">
+        Nuxeo : #{currentDocument.title} [<p:pageNumber />]
+    </p:footer>
+
+    <p:table columns="2" widths="1 3">
+        <p:cell><p:paragraph>Title</p:paragraph></p:cell>
+        <p:cell><p:paragraph alignment="center">#{currentDocument.title}</p:paragraph></p:cell>
+        <p:cell><p:paragraph>Extration date</p:paragraph></p:cell>
+        <p:cell><p:text value=" #{pdfDate}"><f:convertDateTime style="date" format="short" /></p:text></p:cell>
+        <p:cell colspan="2">
+                <p:barCode type="code128"
+                       barHeight="40"
+                       textSize="20"
+                       code="#{currentDocument.id}"
+                       codeType="code128_ucc"
+                       altText="#{currentDocument.id}" />
+        </p:cell>
+    </p:table>
+
+    <p:paragraph>
+    <p:font size="14"><p:paragraph>Description :</p:paragraph></p:font>
+    </p:paragraph>
+
+    <p:paragraph alignment="center">#{currentDocument.dublincore.description}</p:paragraph>
+
+    <p:font size="14"><p:paragraph>Dublincore meta-data : </p:paragraph></p:font>
+    <p:html>
+         <nxl:layout name="dublincore" value="#{currentDocument}" mode="view" />
+    </p:html>
+
+    <p:paragraph>
+    <p:font size="14"><p:paragraph>Attachements :</p:paragraph></p:font>
+    </p:paragraph>
+
+     <p:table columns="3" widths="4 4 1">
+         <ui:repeat value="#{pdfBlobs}" var="blob">
+             <p:cell><p:paragraph>#{blob.filename} </p:paragraph></p:cell>
+             <p:cell><p:paragraph>#{blob.digest} </p:paragraph></p:cell>
+             <p:cell><p:paragraph><p:font size="8">#{blob.digest} </p:font>kB</p:paragraph></p:cell>
+         </ui:repeat>
+     </p:table>
+
+    <p:paragraph>
+         <p:font size="14"><p:paragraph>History</p:paragraph></p:font>
+    </p:paragraph>
+
+     <p:table columns="3" widths="2 3 2">
+        <ui:repeat value="#{logEntries}" var="logEntry">
+            <p:cell><p:paragraph>  	#{messages[logEntry.eventId]} </p:paragraph></p:cell>
+            <p:cell><p:paragraph>  	#{logEntry.eventDate} </p:paragraph></p:cell>
+            <p:cell><p:paragraph>   #{nxu:userFullName(logEntry.principalName)} </p:paragraph></p:cell>
+        </ui:repeat>
+     </p:table>
+
+
+    <p:signature field="Nuxeo Signature"
+                 size="200 200 400 400"  />
+
+</p:document>

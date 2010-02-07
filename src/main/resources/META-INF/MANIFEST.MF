@@ -5,3 +5,4 @@ Bundle-SymbolicName: org.nuxeo.ecm.platform.pdf;singleton:=true
 Bundle-Version: 1.0.0
 Bundle-Vendor: Nuxeo
 Require-Bundle: org.nuxeo.ecm.platform.ui
+Nuxeo-Component: OSGI-INF/actions-contrib.xml

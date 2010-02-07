@@ -1,0 +1,14 @@
+<component name="org.nuxeo.ecm.platform.seampdf.actions">
+
+  <extension target="org.nuxeo.ecm.platform.actions.ActionService"
+    point="actions">
+
+    <action id="pdfSheet" link="#{pdfSheetActionBean.doRender()}" order="17"
+      label="action.pdf.sheet" icon="/icons/pdf.png">
+      <category>DOCUMENT_UPPER_ACTION</category>
+      <filter-id>not_folder</filter-id>
+    </action>
+
+  </extension>
+</component>
+

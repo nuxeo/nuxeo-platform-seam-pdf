@@ -15,33 +15,50 @@
   </ui:define>
 
   <ui:define name="body">
+
     <h1>Sample Documents:</h1>
 
     <ul>
-      <li><s:link view="/pdf/whyseam.xhtml" value="Why Seam?"
-        target="_blank" /> [<s:link view="/pdf/pageSize.xhtml" value="letter">
-        <f:param name="pageSize" value="LETTER" />
-      </s:link>] [<s:link view="/pdf/pageSize.xhtml" value="A4" target="_blank">
-        <f:param name="pageSize" value="A4" />
-      </s:link>] [<s:link view="/pdf/pageSize.xhtml" value="legal" target="_blank">
-        <f:param name="pageSize" value="LEGAL" />
-      </s:link>]</li>
-      <li><s:link view="/pdf/lists.xhtml" value="PDF Lists" target="_blank" /></li>
-      <li><s:link view="/pdf/pages.xhtml" value="Multiple Pages"
-        target="_blank" /></li>
-      <li><s:link view="/pdf/anchor.xhtml" value="Anchors" target="_blank" /></li>
-      <li><s:link view="/pdf/chapters.xhtml" value="Chapters"
-        target="_blank" /></li>
-      <li><s:link view="/pdf/sections.xhtml" value="Sections"
-        target="_blank" /></li>
-      <li><s:link view="/pdf/table.xhtml" value="Tables" target="_blank" /></li>
-      <li><s:link view="/pdf/nested.xhtml" value="Nested Tables"
-        target="_blank" /></li>
-      <li><s:link view="/pdf/format.xhtml"
-        value="Text conversion and formatting" target="_blank" /></li>
-      <li><s:link view="/pdf/signature.xhtml" value="Signed Document"
-        target="_blank" /></li>
-    </ul>
+        <li>
+            <s:link view="/pdf/whyseam.xhtml" value="Why Seam?" />
+            [<s:link view="/pdf/pageSize.xhtml" value="letter">
+                <f:param name="pageSize" value="LETTER" />
+            </s:link>]
+            [<s:link view="/pdf/pageSize.xhtml" value="A4">
+                <f:param name="pageSize" value="A4" />
+            </s:link>]
+            [<s:link view="/pdf/pageSize.xhtml" value="legal">
+                <f:param name="pageSize" value="LEGAL" />
+            </s:link>]
 
-  </ui:define>
+        </li>
+        <li><s:link view="/pdf/lists.xhtml"     value="PDF Lists" /></li>
+        <li><s:link view="/pdf/font.xhtml"      value="Font Selection" /></li>
+        <li><s:link view="/pdf/pages.xhtml"     value="Multiple Pages" /></li>
+        <li><s:link view="/pdf/chapters.xhtml"  value="Chapters" /></li>
+        <li><s:link view="/pdf/sections.xhtml"  value="Sections" /></li>
+        <li><s:link view="/pdf/table.xhtml"     value="Tables" /></li>
+        <li><s:link view="/pdf/nested.xhtml"    value="Nested Tables" /></li>
+        <li><s:link view="/pdf/html.xhtml"      value="HTML Conversion" /></li>
+        <li><s:link view="/pdf/swing.xhtml"     value="Swing Component" /></li>
+
+        <li><s:link view="/pdf/chart.xhtml"     value="JFreeChart" />
+            [<s:link view="/pdf/chartimage.xhtml" value="HTML" />]
+        </li>
+        <li><s:link view="/pdf/anchor.xhtml"    value="Anchors" /></li>
+        <li><s:link view="/pdf/format.xhtml"    value="Text conversion and formatting" /></li>
+        <li><s:link view="/pdf/barcode.xhtml"   value="Bar Code" />
+            [<s:link view="/pdf/barcodeimage.xhtml" value="HTML" />]
+        </li>
+
+
+
+<ui:remove>
+        <li><s:link view="/pdf/images.xhtml" value="Dynamic Images" /></li>
+</ui:remove>
+<ui:remove>
+        <li><s:link view="/pdf/signature.xhtml" value="Signed Document" /></li>
+</ui:remove>
+    </ul>
+</ui:define>
 </nxthemes:composition>

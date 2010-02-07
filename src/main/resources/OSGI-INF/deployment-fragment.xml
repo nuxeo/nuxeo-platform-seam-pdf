@@ -10,6 +10,7 @@
 
   </extension>
 
+<!--
   <extension target="web#FILTER">
     <filter-mapping>
       <filter-name>Seam Servlet Filter</filter-name>
@@ -17,8 +18,9 @@
     </filter-mapping>
 
   </extension>
-
+-->
   <extension target="web#SERVLET">
+
 
     <servlet-mapping>
       <servlet-name>Faces Servlet</servlet-name>
@@ -34,6 +36,14 @@
       <servlet-name>Document Store Servlet</servlet-name>
       <url-pattern>*.pdf</url-pattern>
     </servlet-mapping>
+  </extension>
+
+  <extension target="faces-config#NAVIGATION">
+    <navigation-case>
+      <from-outcome>pdf_sheet</from-outcome>
+      <to-view-id>/pdfSheetView.xhtml</to-view-id>
+      <redirect />
+    </navigation-case>
   </extension>
 
   <install>
