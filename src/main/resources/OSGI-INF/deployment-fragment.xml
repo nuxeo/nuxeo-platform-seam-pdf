@@ -10,7 +10,14 @@
 
   </extension>
 
+
 <!--
+ <extension target="pages#PAGES">
+    <page view-id="/getPdfView.xhtml"
+        action="#{pdfGeneratorHelper.doGenerate}"/>
+  </extension>
+
+
   <extension target="web#FILTER">
     <filter-mapping>
       <filter-name>Seam Servlet Filter</filter-name>
@@ -44,6 +51,12 @@
       <to-view-id>/pdfSheetView.xhtml</to-view-id>
       <redirect />
     </navigation-case>
+    <navigation-case>
+      <from-outcome>simple_pdf</from-outcome>
+      <to-view-id>/simplepdf.xhtml</to-view-id>
+      <redirect />
+    </navigation-case>
+
   </extension>
 
   <install>
