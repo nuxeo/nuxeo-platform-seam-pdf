@@ -23,7 +23,7 @@
         <p:cell><p:paragraph>Title</p:paragraph></p:cell>
         <p:cell><p:paragraph alignment="center">#{currentDocument.title}</p:paragraph></p:cell>
         <p:cell><p:paragraph>Extration date</p:paragraph></p:cell>
-        <p:cell><p:text value=" #{pdfDate}"><f:convertDateTime style="date" format="short" /></p:text></p:cell>
+        <p:cell><p:text value="#{pdfDate}"><f:convertDateTime type="both" dateStyle="full" timeStyle="full" /></p:text></p:cell>
         <p:cell colspan="2">
                 <p:barCode type="code128"
                        barHeight="40"
@@ -45,32 +45,41 @@
          <nxl:layout name="dublincore" value="#{currentDocument}" mode="view" />
     </p:html>
 
-    <p:paragraph>
+    <p:paragraph spacingAfter="10">
     <p:font size="14"><p:paragraph>Attachements :</p:paragraph></p:font>
     </p:paragraph>
 
-     <p:table columns="3" widths="4 4 1">
+     <p:table columns="3" widths="3 3 1" widthPercentage="90" headerRows="1">
+        <p:cell grayFill=".6"><p:paragraph alignment="center">  	Filename </p:paragraph></p:cell>
+        <p:cell grayFill=".6"><p:paragraph alignment="center">  	Digest </p:paragraph></p:cell>
+        <p:cell grayFill=".6"><p:paragraph alignment="center">   Size (kB) </p:paragraph></p:cell>
+
          <ui:repeat value="#{pdfBlobs}" var="blob">
              <p:cell><p:paragraph>#{blob.filename} </p:paragraph></p:cell>
-             <p:cell><p:paragraph>#{blob.digest} </p:paragraph></p:cell>
-             <p:cell><p:paragraph><p:font size="8">#{blob.digest} </p:font>kB</p:paragraph></p:cell>
+             <p:cell><p:paragraph><p:font size="8">#{blob.digest} </p:font></p:paragraph></p:cell>
+             <p:cell><p:paragraph>#{blob.size} kB</p:paragraph></p:cell>
          </ui:repeat>
      </p:table>
 
-    <p:paragraph>
+    <p:paragraph spacingAfter="10">
          <p:font size="14"><p:paragraph>History</p:paragraph></p:font>
     </p:paragraph>
 
-     <p:table columns="3" widths="2 3 2">
+     <p:table columns="3" widths="2 3 2" widthPercentage="90" headerRows="1">
+        <p:cell grayFill=".6"><p:paragraph alignment="center">  	Event </p:paragraph></p:cell>
+        <p:cell grayFill=".6"><p:paragraph alignment="center">  	Date </p:paragraph></p:cell>
+        <p:cell grayFill=".6"><p:paragraph alignment="center">   User </p:paragraph></p:cell>
         <ui:repeat value="#{logEntries}" var="logEntry">
             <p:cell><p:paragraph>  	#{messages[logEntry.eventId]} </p:paragraph></p:cell>
-            <p:cell><p:paragraph>  	#{logEntry.eventDate} </p:paragraph></p:cell>
+            <p:cell><p:paragraph><p:text value="#{logEntry.eventDate}"> <f:convertDateTime type="both" dateStyle="short" timeStyle="short" /></p:text> </p:paragraph></p:cell>
             <p:cell><p:paragraph>   #{nxu:userFullName(logEntry.principalName)} </p:paragraph></p:cell>
         </ui:repeat>
      </p:table>
 
 
-    <p:signature field="Nuxeo Signature"
+
+
+    <p:signature field="Nuxeo Signature" rendered="false"
                  size="200 200 400 400"  />
 
 </p:document>
