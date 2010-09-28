@@ -1,0 +1,79 @@
+<p:document xmlns:ui="http://java.sun.com/jsf/facelets"
+            xmlns:f="http://java.sun.com/jsf/core"
+            xmlns:p="http://jboss.com/products/seam/pdf"
+            xmlns:nxl="http://nuxeo.org/nxforms/layout"
+            xmlns:nxu="http://nuxeo.org/nxweb/util"
+            xmlns:h="http://java.sun.com/jsf/html"
+            xmlns:c="http://java.sun.com/jstl/core"
+            xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+            title="#{seamExportActions.getContentViewTitle()} - #{currentDocument.title}"
+            keywords=""
+            subject=""
+            orientation="landscape"
+            author="Nuxeo (#{currentNuxeoPrincipal.name})"
+            creator="Nuxeo DM">
+
+    <p:header borderWidthTop="1" borderColorTop="blue"
+              borderWidthBottom="0" alignment="center">
+        #{seamExportActions.getContentViewTitle()} - #{currentDocument.title}
+    </p:header>
+
+    <p:footer borderWidthTop="1" borderColorTop="blue"
+              borderWidthBottom="0" alignment="center">
+        #{seamExportActions.getContentViewTitle()} - #{currentDocument.title} [<p:pageNumber />]
+    </p:footer>
+
+    <p:paragraph>
+
+    Yop Yop
+
+ <nxu:set var="contentView" value="#{seamExportActions.getContentView()}" cache="true">
+  <nxu:set var="provider" value="#{contentView.currentPageProvider}" cache="true">
+   <nxu:set var="documents" value="#{provider.currentSelectPage}" cache="true">
+    <nxu:set var="layoutName" value="#{contentView.currentResultLayout.name}" cache="true">
+
+  <c:choose>
+
+    <c:when test="#{!fn:endsWith(layoutName, '_2_columns')}">
+      <p:table columns="#{seamExportActions.getContentLayoutColumnsCount()}" headerRows="1" >
+        <c:forEach var="row" items="#{documents.rows}" varStatus="layoutListingStatus">
+          <c:set var="showListingHeader" value="#{layoutListingStatus.index == 0}" />
+          <nxl:layout name="#{layoutName}" value="#{row}" mode="view" template="/layouts/layout_listing_pdf_template.xhtml"/>
+        </c:forEach>
+      </p:table>
+    </c:when>
+
+    <c:otherwise>
+      <table class="dataOutput2Columns">
+        <tr>
+          <td>
+            <table>
+              <c:forEach var="row" items="#{documents.rows}" varStatus="layoutListingStatus"
+                end="#{(documents.size-1)/2}">
+                <c:set var="showListingHeader" value="#{layoutListingStatus.index == 0}" />
+                <nxl:layout name="#{layoutName}" value="#{row}" mode="view" />
+              </c:forEach>
+            </table>
+          </td>
+          <td>
+            <table>
+              <c:forEach var="row" items="#{documents.rows}" varStatus="layoutListingStatus"
+                begin="#{(documents.size-1)/2 + 1}">
+                <c:set var="showListingHeader" value="#{layoutListingStatus.index == documents.size/2+1}" />
+                <nxl:layout name="#{layoutName}" value="#{row}" mode="view" />
+              </c:forEach>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </c:otherwise>
+
+  </c:choose>
+
+    </nxu:set>
+   </nxu:set>
+  </nxu:set>
+ </nxu:set>
+
+</p:paragraph>
+</p:document>

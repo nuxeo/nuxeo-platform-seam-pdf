@@ -27,11 +27,11 @@ public abstract class AbstractExportBean implements Serializable {
 
     protected static final Log log = LogFactory.getLog(AbstractExportBean.class);
 
-    protected String getCurrentContentViewName() {
+    protected String getContextualContentViewName() {
         String currentContentViewName = null;
 
         // fetch contentViewName from context
-        if (currentContentViewName != null) {
+        if (currentContentViewName == null) {
             ContentView cv = contentViewActions.getCurrentContentView();
             if (cv != null) {
                 currentContentViewName = cv.getName();
@@ -56,7 +56,7 @@ public abstract class AbstractExportBean implements Serializable {
 
     public String getContentViewName() {
         if (contentViewName == null || contentViewName.trim().length() == 0) {
-            return getCurrentContentViewName();
+            return getContextualContentViewName();
         }
         return contentViewName;
     }

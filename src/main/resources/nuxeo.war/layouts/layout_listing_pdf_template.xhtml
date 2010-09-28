@@ -1,0 +1,53 @@
+<f:subview
+  xmlns:c="http://java.sun.com/jstl/core"
+  xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html"
+  xmlns:nxl="http://nuxeo.org/nxforms/layout"
+  xmlns:nxu="http://nuxeo.org/nxweb/util"
+  xmlns:nxd="http://nuxeo.org/nxweb/document"
+  xmlns:p="http://jboss.com/products/seam/pdf"
+  id="#{layout.id}">
+
+<c:if test="false">
+  Layout template applying to an item instance of SelectDataModel named "documents"
+
+  Other needed parameters are:
+  - provider: instance of a ResultProvider to handle sort
+  - layoutListingStatus: iteration status, used to print table header
+    matching widget label.
+</c:if>
+
+<c:if test="#{showListingHeader and layout.properties.showListingHeader}">
+      <nxl:layoutColumn>
+          <c:choose>
+            <c:when test="#{layoutColumn.properties.isListingSelectionBox}">
+              <p:cell> </p:cell>
+            </c:when>
+            <c:when test="#{layoutColumn.properties.isListingSelectionBoxWithCurrentDocument}">
+              <p:cell> </p:cell>
+            </c:when>
+            <c:when test="#{layoutColumn.properties.useFirstWidgetLabelAsColumnHeader}">
+                <p:cell rendered="#{!layoutColumn.widgets[0].translated}">*#{layoutColumn.widgets[0].label}</p:cell>
+                <p:cell rendered="#{layoutColumn.widgets[0].translated}">#{messages[layoutColumn.widgets[0].label]}</p:cell>
+            </c:when>
+            <c:otherwise>
+                <p:cell> </p:cell>
+            </c:otherwise>
+          </c:choose>
+      </nxl:layoutColumn>
+</c:if>
+
+  <nxl:layoutColumn>
+    <p:cell>
+      <nxl:layoutColumnWidget>
+         <p:html>
+          Widget here #{widget.name}
+          <c:if test="false">
+            <nxl:widget widget="#{widget}" value="#{value}" />
+          </c:if>
+        </p:html>
+      </nxl:layoutColumnWidget>
+    </p:cell>
+  </nxl:layoutColumn>
+
+</f:subview>

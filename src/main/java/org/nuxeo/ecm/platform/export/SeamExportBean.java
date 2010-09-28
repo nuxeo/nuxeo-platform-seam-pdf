@@ -15,6 +15,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.TimeZone;
 
+import org.jboss.seam.Component;
 import org.jboss.seam.ScopeType;
 import org.jboss.seam.annotations.Factory;
 import org.jboss.seam.annotations.Name;
@@ -27,7 +28,10 @@ import org.nuxeo.ecm.core.api.blobholder.BlobHolder;
 import org.nuxeo.ecm.core.api.model.DocumentPart;
 import org.nuxeo.ecm.core.api.model.Property;
 import org.nuxeo.ecm.core.storage.sql.coremodel.SQLBlob;
+import org.nuxeo.ecm.platform.forms.layout.service.WebLayoutManager;
 import org.nuxeo.ecm.platform.ui.web.contentview.ContentView;
+import org.nuxeo.ecm.webapp.helpers.ResourcesAccessor;
+import org.nuxeo.runtime.api.Framework;
 
 @Name("seamExportActions")
 @Scope(CONVERSATION)
@@ -51,8 +55,30 @@ public class SeamExportBean extends AbstractExportBean {
         return cv.getPageProvider().getCurrentPage();
     }
 
+    public String getContentViewTitle() throws ClientException {
+
+        ContentView cv = getContentView();
+        String title = cv.getTitle();
+        if (cv.getTranslateTitle()) {
+            ResourcesAccessor resourceAccessor = (ResourcesAccessor) Component.getInstance("resourcesAccessor");
+            String translatedTitle = resourceAccessor.getMessages().get(title);
+            if (translatedTitle!=null && translatedTitle.length()>0) {
+                title = translatedTitle;
+            }
+        }
+        return title;
+    }
+
     public ContentView getContentView() throws ClientException {
-        return contentViewActions.getContentViewWithProvider(getContentViewName());
+        ContentView cv = contentViewActions.getContentViewWithProvider(getContentViewName());
+        return cv;
+    }
+
+    public int getContentLayoutColumnsCount() throws ClientException {
+        String layoutName = getContentView().getCurrentResultLayout().getName();
+        WebLayoutManager wlm = Framework.getLocalService(WebLayoutManager.class);
+        //return wlm.getLayoutDefinition(layoutName).getColumns();
+        return wlm.getLayoutDefinition(layoutName).getRows().length;
     }
 
     @Factory(value="documentAttributes", scope=ScopeType.EVENT)
