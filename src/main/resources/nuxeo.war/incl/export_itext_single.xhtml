@@ -23,7 +23,7 @@
         <p:cell><p:paragraph>Title</p:paragraph></p:cell>
         <p:cell><p:paragraph alignment="center">#{currentDocument.title}</p:paragraph></p:cell>
         <p:cell><p:paragraph>Extration date</p:paragraph></p:cell>
-        <p:cell><p:text value="#{pdfDate}"><f:convertDateTime type="both" dateStyle="full" timeStyle="full" /></p:text></p:cell>
+        <p:cell><p:text value="#{generationDate}"><f:convertDateTime type="both" dateStyle="full" timeStyle="full" /></p:text></p:cell>
         <p:cell colspan="2">
                 <p:barCode type="code128"
                        barHeight="40"
@@ -54,7 +54,7 @@
         <p:cell grayFill=".6"><p:paragraph alignment="center">  	Digest </p:paragraph></p:cell>
         <p:cell grayFill=".6"><p:paragraph alignment="center">   Size (kB) </p:paragraph></p:cell>
 
-         <ui:repeat value="#{pdfBlobs}" var="blob">
+         <ui:repeat value="#{currentDocumentSimpleBlobs}" var="blob">
              <p:cell><p:paragraph>#{blob.filename} </p:paragraph></p:cell>
              <p:cell><p:paragraph><p:font size="8">#{blob.digest} </p:font></p:paragraph></p:cell>
              <p:cell><p:paragraph>#{blob.size} kB</p:paragraph></p:cell>
@@ -75,11 +75,5 @@
             <p:cell><p:paragraph>   #{nxu:userFullName(logEntry.principalName)} </p:paragraph></p:cell>
         </ui:repeat>
      </p:table>
-
-
-
-
-    <p:signature field="Nuxeo Signature" rendered="false"
-                 size="200 200 400 400"  />
 
 </p:document>

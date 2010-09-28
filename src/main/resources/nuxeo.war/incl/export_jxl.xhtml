@@ -1,0 +1,48 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:e="http://jboss.com/products/seam/excel"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:nxd="http://nuxeo.org/nxweb/document"
+	xmlns:nxh="http://nuxeo.org/nxweb/html"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:nxu="http://nuxeo.org/nxweb/util"
+	xmlns:nxl="http://nuxeo.org/nxforms/layout">
+
+<c:if test="#{currentDocument.isFolder()}">
+<e:workbook type="#{format}">
+	<nxu:set var="contentView" value="#{seamExportActions.getContentView()}" cache="true">
+	 <nxu:set var="provider" value="#{contentView.currentPageProvider}" cache="true">
+	  <nxu:set var="documents" value="#{provider.currentSelectPage}" cache="true">
+	   <nxu:set var="layoutName" value="#{contentView.currentResultLayout.name}" cache="true">
+			<e:worksheet name="Children" value="#{documents.rows}" var="row">
+				<c:set var="showListingHeader" value="#{layoutListingStatus.index == 0}" />
+				<nxl:layout name="#{layoutName}" mode="view" template="/layouts/layout_excel_template.xhtml" value="#{row}" />
+			</e:worksheet>
+	   </nxu:set>
+	  </nxu:set>
+	 </nxu:set>
+	</nxu:set>
+</e:workbook>
+</c:if>
+
+<c:if test="#{!currentDocument.isFolder()}">
+<e:workbook type="#{format}">
+  <e:worksheet name="#{currentDocument.dublincore.title}" value="#{documentAttributes.keySet()}" var="propKey">
+    <e:column style="xls-column-autosize:true">
+      <f:facet name="header">
+		<e:cell value="Property name"/>
+	 </f:facet>
+	 <e:cell value="#{propKey}"/>
+    </e:column>
+    <e:column style="xls-column-autosize:true">
+      <f:facet name="header">
+      <e:cell value="value"/>
+     </f:facet>
+	 <e:cell value="#{documentAttributes.get(propKey)}"/>
+    </e:column>
+  </e:worksheet>
+</e:workbook>
+</c:if>
+
+</html>

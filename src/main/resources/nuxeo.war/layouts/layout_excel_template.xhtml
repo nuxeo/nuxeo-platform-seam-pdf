@@ -1,0 +1,40 @@
+<f:subview
+  xmlns:c="http://java.sun.com/jstl/core"
+  xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html"
+  xmlns:nxl="http://nuxeo.org/nxforms/layout"
+  xmlns:nxu="http://nuxeo.org/nxweb/util"
+  xmlns:nxd="http://nuxeo.org/nxweb/document"
+  xmlns:e="http://jboss.com/products/seam/excel"
+  >
+
+<c:if test="false">
+  Layout template applying to an item instance of SelectDataModel named "documents"
+
+  Other needed parameters are:
+  - provider: instance of a ResultProvider to handle sort
+  - layoutListingStatus: iteration status, used to print table header
+    matching widget label.
+
+  Can not use c:if inside the e:worksheet interation => have to use rendered clauses
+</c:if>
+
+
+  <nxl:layoutColumn>
+    <e:column rendered="#{layoutColumn.properties.columnStyleClass!='iconColumn'}">
+      <nxl:layoutColumnWidget>
+        <f:facet name="header">
+		    <e:cell><h:outputText value="#{layoutColumn.widgets[0].label}"
+                      rendered="#{!layoutColumn.widgets[0].translated}" />
+                    <h:outputText value="#{messages[layoutColumn.widgets[0].label]}"
+                      rendered="#{layoutColumn.widgets[0].translated}" />
+		    </e:cell>
+	    </f:facet>
+        <e:cell>
+          <nxl:widget widget="#{widget}" value="#{value}" />
+        </e:cell>
+      </nxl:layoutColumnWidget>
+      </e:column>
+  </nxl:layoutColumn>
+
+</f:subview>

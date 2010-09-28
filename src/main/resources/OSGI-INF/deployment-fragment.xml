@@ -2,77 +2,125 @@
 
 <fragment>
 
-  <extension target="application#MODULE">
+	<extension target="application#MODULE">
 
-    <module>
-      <java>${bundle.fileName}</java>
-    </module>
+		<module>
+			<java>${bundle.fileName}</java>
+		</module>
 
-  </extension>
+	</extension>
 
-
-<!--
- <extension target="pages#PAGES">
-    <page view-id="/getPdfView.xhtml"
-        action="#{pdfGeneratorHelper.doGenerate}"/>
-  </extension>
-
-
-  <extension target="web#FILTER">
-    <filter-mapping>
-      <filter-name>Seam Servlet Filter</filter-name>
-      <url-pattern>*.pdf</url-pattern>
-    </filter-mapping>
-
-  </extension>
--->
-  <extension target="web#SERVLET">
+	<!--
+		<extension target="pages#PAGES"> <page view-id="/getPdfView.xhtml"
+		action="#{pdfGeneratorHelper.doGenerate}"/> </extension> <extension
+		target="web#FILTER"> <filter-mapping> <filter-name>Seam Servlet
+		Filter</filter-name> <url-pattern>*.pdf</url-pattern>
+		</filter-mapping> </extension>
+	-->
+	<extension target="web#SERVLET">
 
 
-    <servlet-mapping>
-      <servlet-name>Faces Servlet</servlet-name>
-      <url-pattern>*.seam</url-pattern>
-    </servlet-mapping>
+		<servlet-mapping>
+			<servlet-name>Faces Servlet</servlet-name>
+			<url-pattern>*.seam</url-pattern>
+		</servlet-mapping>
 
-    <servlet>
-      <servlet-name>Document Store Servlet</servlet-name>
-      <servlet-class>org.jboss.seam.pdf.DocumentStoreServlet</servlet-class>
-    </servlet>
+		<servlet>
+			<servlet-name>Document Store Servlet</servlet-name>
+			<servlet-class>org.jboss.seam.document.DocumentStoreServlet
+			</servlet-class>
+		</servlet>
 
-    <servlet-mapping>
-      <servlet-name>Document Store Servlet</servlet-name>
-      <url-pattern>*.pdf</url-pattern>
-    </servlet-mapping>
-  </extension>
+		<servlet-mapping>
+			<servlet-name>Document Store Servlet</servlet-name>
+			<url-pattern>*.pdf</url-pattern>
+		</servlet-mapping>
+		<servlet-mapping>
+			<servlet-name>Document Store Servlet</servlet-name>
+			<url-pattern>*.csv</url-pattern>
+		</servlet-mapping>
+		<servlet-mapping>
+			<servlet-name>Document Store Servlet</servlet-name>
+			<url-pattern>*.xls</url-pattern>
+		</servlet-mapping>
 
-  <extension target="faces-config#NAVIGATION">
-    <navigation-case>
-      <from-outcome>pdf_sheet</from-outcome>
-      <to-view-id>/pdfSheetView.xhtml</to-view-id>
-      <redirect />
-    </navigation-case>
-    <navigation-case>
-      <from-outcome>simple_pdf</from-outcome>
-      <to-view-id>/simplepdf.xhtml</to-view-id>
-      <redirect />
-    </navigation-case>
+	</extension>
 
-  </extension>
+	<extension target="web#STD-AUTH-FILTER">
+		<!-- auth filter configuration, filter is defined in web-common -->
+		<filter-mapping>
+			<filter-name>NuxeoAuthenticationFilter</filter-name>
+			<url-pattern>/nxexport/*</url-pattern>
+			<dispatcher>REQUEST</dispatcher>
+			<dispatcher>FORWARD</dispatcher>
+		</filter-mapping>
+	</extension>
 
-  <install>
+	<extension target="faces-config#NAVIGATION">
+		<navigation-case>
+			<from-outcome>pdf_sheet</from-outcome>
+			<to-view-id>/pdfSheetView.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>simple_pdf</from-outcome>
+			<to-view-id>/simplepdf.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
 
-    <unzip from="${bundle.fileName}" to="/">
-      <!-- sample templates -->
-      <include>nuxeo.war/**</include>
-      <!-- pdf key store config -->
-      <include>config/**</include>
-    </unzip>
+		<navigation-case>
+			<from-outcome>view_documents_asXL</from-outcome>
+			<to-view-id>/view_documents_asXL.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
 
-    <unzip from="${bundle.fileName}" to="nuxeo.war/WEB-INF/">
-      <include>lib/**</include>
-    </unzip>
+		<navigation-case>
+			<from-outcome>view_documents_asRSS</from-outcome>
+			<to-view-id>/view_documents_asRSS.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
 
-  </install>
+		<navigation-case>
+			<from-outcome>rss</from-outcome>
+			<to-view-id>/rss.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>csv</from-outcome>
+			<to-view-id>/csv.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>atom</from-outcome>
+			<to-view-id>/atom.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+
+		<navigation-case>
+			<from-outcome>xl</from-outcome>
+			<to-view-id>/xl.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+
+	</extension>
+
+	<install>
+
+		<unzip from="${bundle.fileName}" to="/">
+			<!-- sample templates -->
+			<include>nuxeo.war/**</include>
+			<!-- pdf key store config -->
+			<include>config/**</include>
+		</unzip>
+
+		<unzip from="${bundle.fileName}" to="nuxeo.war/WEB-INF/">
+			<include>lib/**</include>
+		</unzip>
+
+	</install>
 
 </fragment>
 

@@ -6,12 +6,12 @@
   <parent>
     <groupId>org.nuxeo.ecm.platform</groupId>
     <artifactId>nuxeo-features-parent</artifactId>
-    <version>5.3.2-SNAPSHOT</version>
+    <version>5.4.0-SNAPSHOT</version>
   </parent>
 
   <artifactId>nuxeo-platform-seam-pdf</artifactId>
   <name>Nuxeo Seam PDF integration</name>
-  <version>5.3.2-SNAPSHOT</version>
+  <version>5.4.0-SNAPSHOT</version>
   <description>
     The seam pdf module allows to generate PDF documents from xhtml templates.
     This module sets configuration to make it work within Nuxeo EP and provides
@@ -28,13 +28,31 @@
       <artifactId>jboss-seam</artifactId>
     </dependency>
     <dependency>
+      <groupId>org.nuxeo.runtime</groupId>
+      <artifactId>nuxeo-runtime</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.nuxeo.ecm.core</groupId>
+      <artifactId>nuxeo-core-api</artifactId>
+    </dependency>
+    <dependency>
       <groupId>org.nuxeo.ecm.core</groupId>
       <artifactId>nuxeo-core-storage-sql</artifactId>
     </dependency>
     <dependency>
       <groupId>org.jboss.seam</groupId>
       <artifactId>jboss-seam-pdf</artifactId>
-      <version>2.0.3.CR1</version>
+      <version>2.1.0.SP1</version>
+    </dependency>
+    <dependency>
+      <groupId>org.jboss.seam</groupId>
+      <artifactId>jboss-seam-rss</artifactId>
+      <version>2.1.0.SP1</version>
+    </dependency>
+    <dependency>
+      <groupId>org.jboss.seam</groupId>
+      <artifactId>jboss-seam-excel</artifactId>
+      <version>2.1.0.SP1</version>
     </dependency>
     <!-- 
       <dependency>
@@ -64,34 +82,54 @@
             </goals>
             <configuration>
               <artifactItems>
-                <!-- seam pdf dep -->
+                <!-- seam additionnal libs -->
                 <artifactItem>
                   <groupId>org.jboss.seam</groupId>
                   <artifactId>jboss-seam-pdf</artifactId>
-                  <version>2.0.3.CR1</version>
+                  <version>2.1.0.SP1</version>
                 </artifactItem>
-                <!-- seam pdf sample additional jar
-                  <artifactItem>
+                <artifactItem>
                   <groupId>org.jboss.seam</groupId>
-                  <artifactId>jboss-seam-itext</artifactId>
-                  <version>2.0.3.CR1</version>
-                  </artifactItem>
-                -->
+                  <artifactId>jboss-seam-excel</artifactId>
+                  <version>2.1.0.SP1</version>
+                </artifactItem>
+                <artifactItem>
+                  <groupId>org.jboss.seam</groupId>
+                  <artifactId>jboss-seam-rss</artifactId>
+                  <version>2.1.0.SP1</version>
+                </artifactItem>
+                <!-- seam additionnal deps -->
+                 <artifactItem>
+                        <groupId>net.sourceforge.jexcelapi</groupId>
+                        <artifactId>jxl</artifactId>
+                        <version>2.6.8-seam</version>
+                 </artifactItem>
+                 <artifactItem>
+                        <groupId>net.sourceforge.yarfraw</groupId>
+                        <artifactId>yarfraw</artifactId>
+                        <version>0.92</version>
+                 </artifactItem>
+
                 <!-- itext deps -->
                 <artifactItem>
                   <groupId>com.lowagie</groupId>
                   <artifactId>itext</artifactId>
-                  <version>2.0.7</version>
+                  <version>2.1.2</version>
+                </artifactItem>
+                <artifactItem>
+                  <groupId>com.lowagie</groupId>
+                  <artifactId>itext-rtf</artifactId>
+                  <version>2.1.2</version>
                 </artifactItem>
                 <artifactItem>
                   <groupId>bouncycastle</groupId>
                   <artifactId>bcmail-jdk14</artifactId>
-                  <version>136</version>
+                  <version>138</version>
                 </artifactItem>
                 <artifactItem>
                   <groupId>bouncycastle</groupId>
                   <artifactId>bcprov-jdk14</artifactId>
-                  <version>136</version>
+                  <version>138</version>
                 </artifactItem>
               </artifactItems>
               <outputDirectory>

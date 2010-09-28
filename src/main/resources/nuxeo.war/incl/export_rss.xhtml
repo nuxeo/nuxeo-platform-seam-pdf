@@ -1,0 +1,36 @@
+<r:feed
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:r="http://jboss.com/products/seam/rss"
+	xmlns:nxd="http://nuxeo.org/nxweb/document"
+
+	title="Children of #{currentDocument.dublincore.title}"
+	feedFormat="#{format}"
+	uid="#{currentDocument.id}"
+	subtitle="SubTitle"
+	updated="#{currentDocument.dublincore.modified}"
+	link="#{baseURL}nxrss/#{currentDocument.repositoryName}#{currentDocument.getPathAsString()}@rss#{seamExportActions.getRssFeedUrlParameters()}"
+	>
+	<ui:repeat value="#{seamExportActions.getRssDocuments()}" var="doc">
+		<r:entry
+			uid="#{doc.id}"
+			title="#{doc.dublincore.title}"
+			link="#{baseURL}nxexport/#{doc.repositoryName}#{doc.getPathAsString()}@rss#{seamExportActions.getRssFeedUrlParameters()}"
+			author="#{doc.dublincore.creator}"
+			summary="#{doc.dublincore.description}"
+			published="#{doc.dublincore.created}"
+			updated="#{doc.dublincore.modified}"
+			rendered="#{doc.isFolder()}"
+		/>
+		<r:entry
+			uid="#{doc.id}"
+			title="#{doc.dublincore.title}"
+			link="#{baseURL}nxpath/#{doc.repositoryName}#{doc.getPathAsString()}@view_documents#{seamExportActions.getRssDocUrlParameters()}"
+			author="#{doc.dublincore.creator}"
+			summary="#{doc.dublincore.description}"
+			published="#{doc.dublincore.created}"
+			updated="#{doc.dublincore.modified}"
+			rendered="#{!doc.isFolder()}"
+		/>
+	</ui:repeat>
+</r:feed>
