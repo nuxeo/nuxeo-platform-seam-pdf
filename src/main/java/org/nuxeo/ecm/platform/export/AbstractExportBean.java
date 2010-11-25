@@ -9,10 +9,10 @@ import org.jboss.seam.annotations.In;
 import org.jboss.seam.core.Manager;
 import org.nuxeo.ecm.core.api.ClientException;
 import org.nuxeo.ecm.core.api.DocumentModel;
+import org.nuxeo.ecm.platform.contentview.jsf.ContentView;
 import org.nuxeo.ecm.platform.types.Type;
 import org.nuxeo.ecm.platform.types.TypeManager;
 import org.nuxeo.ecm.platform.ui.web.api.NavigationContext;
-import org.nuxeo.ecm.platform.ui.web.contentview.ContentView;
 import org.nuxeo.ecm.webapp.contentbrowser.ContentViewActions;
 import org.nuxeo.runtime.api.Framework;
 

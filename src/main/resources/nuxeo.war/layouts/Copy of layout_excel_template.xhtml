@@ -18,14 +18,25 @@
 
   Can not use c:if inside the e:worksheet interation => have to use rendered clauses
 </c:if>
+
   <nxl:layoutColumn>
     <e:column>
-      <e:cell style="xls-font: red bold 10 Verdana">
+      <e:cell>Ya</e:cell>
       <nxl:layoutColumnWidget>
-      <nxl:widget widget="#{widget}" value="#{value}"/>
+      
+        <f:facet name="header">
+		    <e:cell><h:outputText value="#{layoutColumn.widgets[0].label}"
+                      rendered="#{!layoutColumn.widgets[0].translated}" />
+                    <h:outputText value="#{messages[layoutColumn.widgets[0].label]}"
+                      rendered="#{layoutColumn.widgets[0].translated}" />
+		    </e:cell>
+	    </f:facet>
+        <e:cell>
+        	  <nxl:widget widget="#{widget}" value="#{value}"/>
+        	  Yo
+        </e:cell>
       </nxl:layoutColumnWidget>
-      </e:cell>
-    </e:column>
+      </e:column>
   </nxl:layoutColumn>
 
 </f:subview>

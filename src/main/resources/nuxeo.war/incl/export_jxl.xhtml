@@ -9,15 +9,42 @@
 	xmlns:nxu="http://nuxeo.org/nxweb/util"
 	xmlns:nxl="http://nuxeo.org/nxforms/layout">
 
+<c:if test="false">
+	<nxu:set var="contentView" value="#{seamExportActions.getContentView()}" cache="true">
+	 <nxu:set var="provider" value="#{contentView.currentPageProvider}" cache="true">
+	  <nxu:set var="documents" value="#{provider.currentSelectPage}" cache="true">
+	   <nxu:set var="layoutName" value="#{contentView.currentResultLayout.name}" cache="true">
+
+	   <h:outputText value="#{layoutName}"/>
+	   <h:outputText value="#{documents.rows.size}"/>
+	   <c:forEach var="row"
+                    items="#{documents.rows}">
+	   		<c:set var="showListingHeader" value="#{layoutListingStatus.index == 0}" />
+	   		<nxl:layout name="#{layoutName}" mode="view" template="/layouts/layout_excel_template_dump.xhtml" value="#{row}" />
+	   </c:forEach>
+
+</nxu:set>
+</nxu:set>
+</nxu:set>
+</nxu:set>
+</c:if>
+
 <c:if test="#{currentDocument.isFolder()}">
-<e:workbook type="#{format}">
+<c:set var="widgetMode" value="plain"/>
+<c:if test="#{exportFormat=='jxl'}">
+	<c:set var="widgetMode" value="xl"/>
+</c:if>
+<e:workbook type="#{exportFormat}">
 	<nxu:set var="contentView" value="#{seamExportActions.getContentView()}" cache="true">
 	 <nxu:set var="provider" value="#{contentView.currentPageProvider}" cache="true">
 	  <nxu:set var="documents" value="#{provider.currentSelectPage}" cache="true">
 	   <nxu:set var="layoutName" value="#{contentView.currentResultLayout.name}" cache="true">
 			<e:worksheet name="Children" value="#{documents.rows}" var="row">
 				<c:set var="showListingHeader" value="#{layoutListingStatus.index == 0}" />
-				<nxl:layout name="#{layoutName}" mode="view" template="/layouts/layout_excel_template.xhtml" value="#{row}" />
+				<nxl:layout name="#{layoutName}" mode="#{widgetMode}" template="/layouts/layout_excel_template.xhtml" value="#{row}" />
+				 <e:column>
+				 <e:cell>#{widgetMode}</e:cell>
+				 </e:column>
 			</e:worksheet>
 	   </nxu:set>
 	  </nxu:set>

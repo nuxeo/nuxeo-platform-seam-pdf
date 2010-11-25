@@ -1,0 +1,28 @@
+<f:subview id="#{widget.id}"
+  xmlns:c="http://java.sun.com/jstl/core"
+  xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:e="http://jboss.com/products/seam/excel"
+>
+<c:if test="#{widget.mode == 'plain'}">
+  <e:cell>
+ 	#{field_0}
+  </e:cell>
+</c:if>
+<c:if test="#{widget.mode == 'xl'}">
+<e:cell>
+ #{field_0}
+</e:cell>
+</c:if>
+
+<c:if test="#{widget.mode == 'view'}">
+<h:selectBooleanCheckbox
+  xmlns:h="http://java.sun.com/jsf/html"
+  xmlns:a4j="https://ajax4jsf.dev.java.net/ajax"
+  id="#{widget.id}"
+  value="#{field_0}">
+  <a4j:support id="#{widget.id}_ajax_onclick" event="onclick"
+    action="#{documentListingActions.checkCurrentDocAndProcessSelectRow(field_1, contentView.name, contentView.selectionListName, field_0, currentDocument.ref)}"
+    reRender="ajax_selection_buttons" />
+</h:selectBooleanCheckbox>
+</c:if>
+</f:subview>

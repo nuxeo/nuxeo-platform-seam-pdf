@@ -28,8 +28,8 @@ import org.nuxeo.ecm.core.api.blobholder.BlobHolder;
 import org.nuxeo.ecm.core.api.model.DocumentPart;
 import org.nuxeo.ecm.core.api.model.Property;
 import org.nuxeo.ecm.core.storage.sql.coremodel.SQLBlob;
+import org.nuxeo.ecm.platform.contentview.jsf.ContentView;
 import org.nuxeo.ecm.platform.forms.layout.service.WebLayoutManager;
-import org.nuxeo.ecm.platform.ui.web.contentview.ContentView;
 import org.nuxeo.ecm.webapp.helpers.ResourcesAccessor;
 import org.nuxeo.runtime.api.Framework;
 
@@ -51,7 +51,7 @@ public class SeamExportBean extends AbstractExportBean {
         String contentViewName = getContentViewName();
         List<SortInfo> sortInfos = new ArrayList<SortInfo>();
         sortInfos.add(new SortInfo("dc:modified", true));
-        ContentView cv = contentViewActions.getContentViewWithProvider(contentViewName, null, sortInfos, 0, null);
+        ContentView cv = contentViewActions.getContentViewWithProvider(contentViewName, null, sortInfos, new Long(0), new Long(0));
         return cv.getPageProvider().getCurrentPage();
     }
 

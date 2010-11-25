@@ -6,7 +6,7 @@
   <parent>
     <groupId>org.nuxeo.ecm.platform</groupId>
     <artifactId>nuxeo-features-parent</artifactId>
-    <version>5.4.0-SNAPSHOT</version>
+    <version>5.4.0</version>
   </parent>
 
   <artifactId>nuxeo-platform-seam-pdf</artifactId>
@@ -22,6 +22,11 @@
     <dependency>
       <groupId>org.nuxeo.ecm.platform</groupId>
       <artifactId>nuxeo-platform-webapp-base</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.nuxeo.ecm.platform</groupId>
+      <artifactId>nuxeo-platform-contentview-jsf</artifactId>
+      <version>5.4.0</version>
     </dependency>
     <dependency>
       <groupId>org.nuxeo.ecm.platform</groupId>

@@ -1,0 +1,28 @@
+<f:subview
+  xmlns:c="http://java.sun.com/jstl/core"
+  xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:nxu="http://nuxeo.org/nxweb/util"
+  xmlns:nxd="http://nuxeo.org/nxweb/document"
+  xmlns:nxh="http://nuxeo.org/nxweb/html"
+  xmlns:h="http://java.sun.com/jsf/html"
+  xmlns:e="http://jboss.com/products/seam/excel">
+
+<c:if test="#{widget.mode == 'view'}">
+   <h:outputText value="#{field}" >
+     <f:convertDateTime pattern="#{nxu:basicDateAndTimeFormater()}"
+         timeZone="#{timeZone}" />
+   </h:outputText>
+</c:if>
+
+<c:if test="#{widget.mode == 'plain'}">
+  <e:cell>
+	#{field}
+  </e:cell>
+</c:if>
+<c:if test="#{widget.mode == 'xl'}">
+  <e:cell forceType="date" style="xls-font: red bold 10 Verdana">
+	#{field}
+  </e:cell>
+</c:if>
+
+</f:subview>
