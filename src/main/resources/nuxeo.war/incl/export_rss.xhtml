@@ -1,16 +1,16 @@
-<r:feed
-  xmlns="http://www.w3.org/1999/xhtml"
+<nxr:feed
   xmlns:ui="http://java.sun.com/jsf/facelets"
   xmlns:r="http://jboss.com/products/seam/rss"
+  xmlns:nxr="http://nuxeo.org/nxweb/seam/rss"
   xmlns:nxd="http://nuxeo.org/nxweb/document"
   title="Children of #{currentDocument.dublincore.title}"
-  feedFormat="RSS20"
+  feedFormat="#{feedFormat}"
   uid="#{currentDocument.id}"
   subtitle="SubTitle"
   updated="#{currentDocument.dublincore.modified}"
   link="#{baseURL}nxrss/#{currentDocument.repositoryName}#{currentDocument.getPathAsString()}@rss#{seamExportActions.getRssFeedUrlParameters()}"
   >
-  <ui:repeat value="#{seamExportActions.getRssDocuments()}" var="doc">
+  <ui:repeat value="#{seamExportActions.rssDocuments}" var="doc">
     <r:entry
       uid="#{doc.id}"
       title="#{doc.dublincore.title}"
@@ -32,4 +32,4 @@
       rendered="#{!doc.isFolder()}"
     />
   </ui:repeat>
-</r:feed>
+</nxr:feed>

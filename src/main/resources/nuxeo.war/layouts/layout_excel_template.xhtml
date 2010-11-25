@@ -6,6 +6,7 @@
   xmlns:nxu="http://nuxeo.org/nxweb/util"
   xmlns:nxd="http://nuxeo.org/nxweb/document"
   xmlns:e="http://jboss.com/products/seam/excel"
+  xmlns:nxe="http://nuxeo.org/nxweb/seam/excel"
   >
 
 <c:if test="false">
@@ -19,13 +20,13 @@
   Can not use c:if inside the e:worksheet interation => have to use rendered clauses
 </c:if>
   <nxl:layoutColumn>
-    <e:column>
-      <e:cell style="xls-font: red bold 10 Verdana">
+    <nxe:column>
       <nxl:layoutColumnWidget>
-      <nxl:widget widget="#{widget}" value="#{value}"/>
+        <e:cell style="xls-font: red bold 10 Verdana">
+          <nxl:widget widget="#{widget}" value="#{value}"/>
+        </e:cell>
       </nxl:layoutColumnWidget>
-      </e:cell>
-    </e:column>
+    </nxe:column>
   </nxl:layoutColumn>
 
 </f:subview>

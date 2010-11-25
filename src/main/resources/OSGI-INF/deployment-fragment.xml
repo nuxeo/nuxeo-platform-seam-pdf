@@ -108,6 +108,19 @@
 
   </extension>
 
+  <extension target="faces-config#COMPONENT">
+
+    <component>
+      <component-type>org.nuxeo.ecm.platform.jsf.UIFeed</component-type>
+      <component-class>org.nuxeo.ecm.platform.jsf.UIFeed</component-class>
+    </component>
+    <component>
+      <component-type>org.nuxeo.ecm.platform.jsf.UIColumn</component-type>
+      <component-class>org.nuxeo.ecm.platform.jsf.UIColumn</component-class>
+    </component>
+
+  </extension>
+
   <install>
 
     <unzip from="${bundle.fileName}" to="/">
