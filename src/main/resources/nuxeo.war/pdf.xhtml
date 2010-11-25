@@ -3,14 +3,14 @@
   xmlns:c="http://java.sun.com/jstl/core"
   xmlns:ui="http://java.sun.com/jsf/facelets">
 
-	<c:if test="#{!currentDocument.isFolder()}" >
-		<ui:include src="incl/export_itext_single.xhtml">
-		</ui:include>
-	</c:if>
+  <c:if test="#{!currentDocument.isFolder()}" >
+    <ui:include src="incl/export_itext_single.xhtml">
+    </ui:include>
+  </c:if>
 
-	<c:if test="#{currentDocument.isFolder()}" >
-		<ui:include src="incl/export_itext_list.xhtml">
-		</ui:include>
-	</c:if>
+  <c:if test="#{currentDocument.isFolder()}" >
+    <ui:include src="incl/export_itext_list.xhtml">
+    </ui:include>
+  </c:if>
 
 </c:if>

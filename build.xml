@@ -8,7 +8,7 @@
   <property name="jboss.deploy" value="${jboss.server}/deploy" />
   <property name="jboss.nuxeo.ear" value="${jboss.deploy}/nuxeo.ear" />
 
-  <target name="deploy-web-live" depends="web"/>
+  <target name="deploy-web-live" depends="web" />
   <target name="web" description="Deploy Web components to the live ECM">
     <copy todir="${jboss.nuxeo.ear}/nuxeo.war">
       <fileset dir="${basedir}/src/main/resources/nuxeo.war" />

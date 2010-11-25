@@ -40,7 +40,8 @@ public class SeamExportBean extends AbstractExportBean {
     private static final long serialVersionUID = 1L;
 
     public String getRssFeedUrlParameters() {
-        return "?contentView=" + getContentViewName() + "&conversationId=" + getConversationId();
+        return "?contentView=" + getContentViewName() + "&conversationId="
+                + getConversationId();
     }
 
     public String getRssDocUrlParameters() {
@@ -51,7 +52,8 @@ public class SeamExportBean extends AbstractExportBean {
         String contentViewName = getContentViewName();
         List<SortInfo> sortInfos = new ArrayList<SortInfo>();
         sortInfos.add(new SortInfo("dc:modified", true));
-        ContentView cv = contentViewActions.getContentViewWithProvider(contentViewName, null, sortInfos, new Long(0), new Long(0));
+        ContentView cv = contentViewActions.getContentViewWithProvider(
+                contentViewName, null, sortInfos, new Long(0), new Long(0));
         return cv.getPageProvider().getCurrentPage();
     }
 
@@ -62,7 +64,7 @@ public class SeamExportBean extends AbstractExportBean {
         if (cv.getTranslateTitle()) {
             ResourcesAccessor resourceAccessor = (ResourcesAccessor) Component.getInstance("resourcesAccessor");
             String translatedTitle = resourceAccessor.getMessages().get(title);
-            if (translatedTitle!=null && translatedTitle.length()>0) {
+            if (translatedTitle != null && translatedTitle.length() > 0) {
                 title = translatedTitle;
             }
         }
@@ -77,11 +79,11 @@ public class SeamExportBean extends AbstractExportBean {
     public int getContentLayoutColumnsCount() throws ClientException {
         String layoutName = getContentView().getCurrentResultLayout().getName();
         WebLayoutManager wlm = Framework.getLocalService(WebLayoutManager.class);
-        //return wlm.getLayoutDefinition(layoutName).getColumns();
+        // return wlm.getLayoutDefinition(layoutName).getColumns();
         return wlm.getLayoutDefinition(layoutName).getRows().length;
     }
 
-    @Factory(value="documentAttributes", scope=ScopeType.EVENT)
+    @Factory(value = "documentAttributes", scope = ScopeType.EVENT)
     public Map<String, String> getDocumentAttributes() throws ClientException {
 
         Map<String, String> attributes = new HashMap<String, String>();
@@ -93,10 +95,10 @@ public class SeamExportBean extends AbstractExportBean {
             DocumentPart part = currentDoc.getPart(schema);
             String prefix = schema + ".";
             if (part.getSchema().getNamespace().hasPrefix()) {
-                prefix="";
+                prefix = "";
             }
 
-            for (Property prop :  part.getChildren()) {
+            for (Property prop : part.getChildren()) {
                 String name = prefix + prop.getName();
                 String value = getStringValue(prop);
 
@@ -115,21 +117,23 @@ public class SeamExportBean extends AbstractExportBean {
     }
 
     protected String getStringValue(Property prop) throws ClientException {
-        if (prop==null || prop.getValue()==null) {
+        if (prop == null || prop.getValue() == null) {
             return "<null>";
         }
 
         Serializable value = prop.getValue();
-        String stringValue=value.toString();
+        String stringValue = value.toString();
         if (value instanceof Blob) {
             SQLBlob sqlBlob = (SQLBlob) value;
             VCSBlobHelper.updatePropertiesFromSQLBlob(sqlBlob);
-            stringValue = sqlBlob.getFilename() + "(" + sqlBlob.getDigest() + ")";
+            stringValue = sqlBlob.getFilename() + "(" + sqlBlob.getDigest()
+                    + ")";
         } else if (value instanceof Calendar) {
             Calendar cal = (Calendar) value;
-            DateFormat df = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss z",Locale.US);
+            DateFormat df = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss z",
+                    Locale.US);
             df.setTimeZone(TimeZone.getTimeZone("GMT"));
-            stringValue=df.format(cal.getTime());
+            stringValue = df.format(cal.getTime());
         } else if (value instanceof String[]) {
             stringValue = "";
             for (String item : (String[]) value) {
@@ -152,7 +156,7 @@ public class SeamExportBean extends AbstractExportBean {
         List<Blob> blobs = bh.getBlobs();
         List<SimpleBlob> result = new ArrayList<SimpleBlob>();
 
-        if (blobs==null) {
+        if (blobs == null) {
             return result;
         }
 
@@ -163,7 +167,7 @@ public class SeamExportBean extends AbstractExportBean {
                 SimpleBlob sBlob = new SimpleBlob();
                 sBlob.setFilename(sqlBlob.getFilename());
                 sBlob.setDigest(sqlBlob.getDigest());
-                sBlob.setSize(sqlBlob.getLength()/1024);
+                sBlob.setSize(sqlBlob.getLength() / 1024);
                 result.add(sBlob);
             }
         }

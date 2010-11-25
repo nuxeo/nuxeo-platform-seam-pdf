@@ -39,7 +39,8 @@ public class VCSBlobHelper {
         return null;
     }
 
-    private static void updatePropertiesFromBinary(final Binary binary, SQLBlob blob) {
+    private static void updatePropertiesFromBinary(final Binary binary,
+            SQLBlob blob) {
         if (binary == null) {
             return;
         }

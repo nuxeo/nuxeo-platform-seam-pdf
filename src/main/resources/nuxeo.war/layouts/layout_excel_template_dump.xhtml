@@ -23,14 +23,14 @@
     ecol
       <nxl:layoutColumnWidget>
         <f:facet name="header">
-		    ecelh<h:outputText value="#{layoutColumn.widgets[0].label}"
+        ecelh<h:outputText value="#{layoutColumn.widgets[0].label}"
                       rendered="#{!layoutColumn.widgets[0].translated}" />
                     <h:outputText value="#{messages[layoutColumn.widgets[0].label]}"
                       rendered="#{layoutColumn.widgets[0].translated}" />
-		    ecelh
-	    </f:facet>
+        ecelh
+      </f:facet>
         ecell
-        	  <nxl:widget widget="#{widget}" value="#{value}"/>
+            <nxl:widget widget="#{widget}" value="#{value}"/>
         ecell
       </nxl:layoutColumnWidget>
       ecol

@@ -30,7 +30,7 @@
     </dependency>
     <dependency>
       <groupId>org.nuxeo.ecm.platform</groupId>
-     <artifactId>nuxeo-platform-forms-layout-client</artifactId>    
+      <artifactId>nuxeo-platform-forms-layout-client</artifactId>
     </dependency>
     <dependency>
       <groupId>org.jboss.seam</groupId>
@@ -108,16 +108,16 @@
                   <version>2.1.0.SP1</version>
                 </artifactItem>
                 <!-- seam additionnal deps -->
-                 <artifactItem>
-                        <groupId>net.sourceforge.jexcelapi</groupId>
-                        <artifactId>jxl</artifactId>
-                        <version>2.6.8-seam</version>
-                 </artifactItem>
-                 <artifactItem>
-                        <groupId>net.sourceforge.yarfraw</groupId>
-                        <artifactId>yarfraw</artifactId>
-                        <version>0.92</version>
-                 </artifactItem>
+                <artifactItem>
+                  <groupId>net.sourceforge.jexcelapi</groupId>
+                  <artifactId>jxl</artifactId>
+                  <version>2.6.8-seam</version>
+                </artifactItem>
+                <artifactItem>
+                  <groupId>net.sourceforge.yarfraw</groupId>
+                  <artifactId>yarfraw</artifactId>
+                  <version>0.92</version>
+                </artifactItem>
 
                 <!-- itext deps -->
                 <artifactItem>

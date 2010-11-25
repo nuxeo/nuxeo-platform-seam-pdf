@@ -50,8 +50,8 @@
     </p:paragraph>
 
      <p:table columns="3" widths="3 3 1" widthPercentage="90" headerRows="1">
-        <p:cell grayFill=".6"><p:paragraph alignment="center">  	Filename </p:paragraph></p:cell>
-        <p:cell grayFill=".6"><p:paragraph alignment="center">  	Digest </p:paragraph></p:cell>
+        <p:cell grayFill=".6"><p:paragraph alignment="center">    Filename </p:paragraph></p:cell>
+        <p:cell grayFill=".6"><p:paragraph alignment="center">    Digest </p:paragraph></p:cell>
         <p:cell grayFill=".6"><p:paragraph alignment="center">   Size (kB) </p:paragraph></p:cell>
 
          <ui:repeat value="#{currentDocumentSimpleBlobs}" var="blob">
@@ -66,11 +66,11 @@
     </p:paragraph>
 
      <p:table columns="3" widths="2 3 2" widthPercentage="90" headerRows="1">
-        <p:cell grayFill=".6"><p:paragraph alignment="center">  	Event </p:paragraph></p:cell>
-        <p:cell grayFill=".6"><p:paragraph alignment="center">  	Date </p:paragraph></p:cell>
+        <p:cell grayFill=".6"><p:paragraph alignment="center">    Event </p:paragraph></p:cell>
+        <p:cell grayFill=".6"><p:paragraph alignment="center">    Date </p:paragraph></p:cell>
         <p:cell grayFill=".6"><p:paragraph alignment="center">   User </p:paragraph></p:cell>
         <ui:repeat value="#{logEntries}" var="logEntry">
-            <p:cell><p:paragraph>  	#{messages[logEntry.eventId]} </p:paragraph></p:cell>
+            <p:cell><p:paragraph>    #{messages[logEntry.eventId]} </p:paragraph></p:cell>
             <p:cell><p:paragraph><p:text value="#{logEntry.eventDate}"> <f:convertDateTime type="both" dateStyle="short" timeStyle="short" /></p:text> </p:paragraph></p:cell>
             <p:cell><p:paragraph>   #{nxu:userFullName(logEntry.principalName)} </p:paragraph></p:cell>
         </ui:repeat>
