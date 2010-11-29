@@ -7,16 +7,13 @@
   xmlns:h="http://java.sun.com/jsf/html">
 
 <c:if test="#{widget.mode == 'view'}">
-	<h:graphicImage value="/icons/lock.gif"
-	   id="#{widget.id}"
-	   rendered="#{not empty field}"/>
+  <h:graphicImage value="/icons/lock.gif"
+     id="#{widget.id}"
+     rendered="#{not empty field}"/>
 </c:if>
 
 <c:if test="#{widget.mode == 'plain'}">
-	#{field}
-</c:if>
-<c:if test="#{widget.mode == 'xl'}">
-	#{field}
+#{field}
 </c:if>
 
 </f:subview>

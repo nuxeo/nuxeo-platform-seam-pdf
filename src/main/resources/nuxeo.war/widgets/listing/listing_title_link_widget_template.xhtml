@@ -4,8 +4,7 @@
   xmlns:nxu="http://nuxeo.org/nxweb/util"
   xmlns:nxd="http://nuxeo.org/nxweb/document"
   xmlns:nxh="http://nuxeo.org/nxweb/html"
-  xmlns:h="http://java.sun.com/jsf/html"
-  xmlns:e="http://jboss.com/products/seam/excel">
+  xmlns:h="http://java.sun.com/jsf/html">
 
 <c:if test="#{widget.mode == 'view'}">
 
@@ -37,15 +36,7 @@
 </c:if>
 
 <c:if test="#{widget.mode == 'plain'}">
-<e:cell>
-  #{nxd:titleOrId(field_0)}
-</e:cell>
-</c:if>
-<c:if test="#{widget.mode == 'xl'}">
-  <e:hyperlink
-  URL="http://www.google.com"
-  description="#{nxd:titleOrId(field_0)}">
-  <e:cell>#{nxd:titleOrId(field_0)}</e:cell></e:hyperlink>
+<h:outputText value=" #{nxd:titleOrId(field_0)}" escape="false"/>
 </c:if>
 
 </f:subview>

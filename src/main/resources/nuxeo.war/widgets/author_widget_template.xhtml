@@ -1,0 +1,17 @@
+<f:subview  xmlns:c="http://java.sun.com/jstl/core"
+  xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html">
+
+<c:if test="#{widget.mode == 'view'}">
+<div>
+   <span onmouseover="tooltip.show('#{field}', 150);" onmouseout="tooltip.hide();">
+   <h:outputText value="#{nxu:userFullName(field)}"   />
+ </span>
+</div>
+</c:if>
+
+<c:if test="#{widget.mode == 'plain'}">
+   <h:outputText value="#{nxu:userFullName(field)}"   />
+</c:if>
+
+</f:subview>

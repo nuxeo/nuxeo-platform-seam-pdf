@@ -1,6 +1,22 @@
-<c:if test="#{field.hasFacet('Versionable')}"
+<f:subview
   xmlns:c="http://java.sun.com/jstl/core"
+  xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:nxu="http://nuxeo.org/nxweb/util"
+  xmlns:nxd="http://nuxeo.org/nxweb/document"
+  xmlns:nxh="http://nuxeo.org/nxweb/html"
   xmlns:h="http://java.sun.com/jsf/html">
-  <h:outputText value="#{versioningManager.getVersionLabel(field)}"
-    id="#{widget.id}" />
+
+<c:if test="#{widget.mode == 'view'}">
+  <c:if test="#{field.hasFacet('Versionable')}"
+    xmlns:c="http://java.sun.com/jstl/core"
+    xmlns:h="http://java.sun.com/jsf/html">
+    <h:outputText value="#{versioningManager.getVersionLabel(field)}"
+      id="#{widget.id}" />
+  </c:if>
 </c:if>
+
+<c:if test="#{widget.mode == 'plain'}">
+<h:outputText value="#{versioningManager.getVersionLabel(field)}" rendered="#{field.hasFacet('Versionable')}"/>
+</c:if>
+
+</f:subview>

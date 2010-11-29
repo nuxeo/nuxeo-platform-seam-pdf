@@ -2,18 +2,10 @@
   xmlns:c="http://java.sun.com/jstl/core"
   xmlns:f="http://java.sun.com/jsf/core"
   xmlns:nxu="http://nuxeo.org/nxweb/util"
-  xmlns:h="http://java.sun.com/jsf/html"
-  xmlns:e="http://jboss.com/products/seam/excel">
+  xmlns:h="http://java.sun.com/jsf/html">
 
 <c:if test="#{widget.mode == 'plain'}">
-<e:cell>
- <h:outputText value="#{field_2}"/>
-</e:cell>
-</c:if>
-<c:if test="#{widget.mode == 'xl'}">
-<e:cell>
- <h:outputText value="#{field_2}"/>
-</e:cell>
+<h:outputText value="#{field_2}"/>
 </c:if>
 
 <c:if test="#{widget.mode == 'view'}">

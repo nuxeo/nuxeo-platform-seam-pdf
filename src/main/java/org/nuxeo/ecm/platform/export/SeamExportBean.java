@@ -18,6 +18,7 @@ import java.util.TimeZone;
 import org.jboss.seam.Component;
 import org.jboss.seam.ScopeType;
 import org.jboss.seam.annotations.Factory;
+import org.jboss.seam.annotations.In;
 import org.jboss.seam.annotations.Name;
 import org.jboss.seam.annotations.Scope;
 import org.nuxeo.ecm.core.api.Blob;
@@ -30,7 +31,9 @@ import org.nuxeo.ecm.core.api.model.Property;
 import org.nuxeo.ecm.core.storage.sql.coremodel.SQLBlob;
 import org.nuxeo.ecm.platform.contentview.jsf.ContentView;
 import org.nuxeo.ecm.platform.forms.layout.service.WebLayoutManager;
+import org.nuxeo.ecm.platform.ui.web.api.NavigationContext;
 import org.nuxeo.ecm.webapp.helpers.ResourcesAccessor;
+import org.nuxeo.ecm.webapp.search.DocumentSearchActions;
 import org.nuxeo.runtime.api.Framework;
 
 @Name("seamExportActions")
@@ -38,6 +41,9 @@ import org.nuxeo.runtime.api.Framework;
 public class SeamExportBean extends AbstractExportBean {
 
     private static final long serialVersionUID = 1L;
+
+    @In(create=true)
+    protected DocumentSearchActions documentSearchActions;
 
     public String getRssFeedUrlParameters() {
         return "?contentView=" + getContentViewName() + "&conversationId="
@@ -81,6 +87,43 @@ public class SeamExportBean extends AbstractExportBean {
         WebLayoutManager wlm = Framework.getLocalService(WebLayoutManager.class);
         // return wlm.getLayoutDefinition(layoutName).getColumns();
         return wlm.getLayoutDefinition(layoutName).getRows().length;
+    }
+
+    public List<String> getResultColumns() throws ClientException {
+        ContentView cv = getContentView();
+        if (cv.getName().equals("advanced_search")) {
+            return documentSearchActions.getSelectedLayoutColumns();
+        }
+        return cv.getResultLayoutColumns();
+    }
+
+    public String getRestUrl() throws ClientException {
+
+        NavigationContext navigationContext = (NavigationContext) Component.getInstance("navigationContext");
+        DocumentModel currentDoc = navigationContext.getCurrentDocument();
+
+        StringBuilder sb = new StringBuilder();
+        sb.append(navigationContext.getCurrentServerLocation().getName());
+        sb.append(currentDoc.getPathAsString());
+        sb.append("@xl?");
+
+        ContentView cv = getContentView();
+        sb.append("cv=");
+        sb.append(cv.getName());
+
+        sb.append("&si=");
+        SortInfo sortInfo = cv.getPageProvider().getSortInfo();
+        sb.append(SortInfo.asMap(sortInfo).toString());
+
+        Object[] params = cv.getPageProvider().getParameters();
+        sb.append("&params=");
+        sb.append(params.toString());
+
+        sb.append("&dataModels=");
+        sb.append(cv.getPageProvider().getSearchDocumentModel().getDataModels().toString());
+
+        return sb.toString();
+
     }
 
     @Factory(value = "documentAttributes", scope = ScopeType.EVENT)

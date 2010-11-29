@@ -652,6 +652,9 @@
         <property name="file_field_name">content</property>
         <property name="filename_field_name">filename</property>
       </properties>
+      <widgetModes>
+        <mode value="plain">hidden</mode>
+      </widgetModes>
     </widget>
 
     <widget name="listing_version" type="listing_version">
